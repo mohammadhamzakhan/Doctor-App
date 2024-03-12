@@ -3,7 +3,7 @@ import 'package:doctor_app/consts/strings.dart';
 import 'package:doctor_app/res/components/custom_elevated_button.dart';
 import 'package:doctor_app/res/components/custom_text_button.dart';
 import 'package:doctor_app/res/components/custom_textfield.dart';
-import 'package:doctor_app/views/Home/home_view.dart';
+import 'package:doctor_app/views/Home/home.dart';
 import 'package:doctor_app/views/SignupView/signup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -49,10 +49,12 @@ class LoginView extends StatelessWidget {
                       Align(
                           alignment: Alignment.centerRight,
                           child: CustomTextButton(
-                              buttonText: "ForgotPassword?", onTap: () {})),
+                              buttonText: "ForgotPassword?", onTap: () {}
+                          ),
+                      ),
                       const Gap(30),
                       CustomElevatedButton(buttonText: "Login", onTap: () {
-                        Get.to(()=>HomeView());
+                        Get.to(()=>Bottom());
                       }),
                       const Gap(30),
                       Row(

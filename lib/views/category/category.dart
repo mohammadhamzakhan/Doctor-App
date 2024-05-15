@@ -32,7 +32,7 @@ class Category extends StatelessWidget {
               itemBuilder: (context, index){
               return GestureDetector(
                 onTap: (){
-                  Get.to((CategoryDetailsView()));
+                  Get.to((CategoryDetailsView(catName: iconTitleList[index],)));
                 },
                 child: Container(
                   padding: const EdgeInsets.all(10),

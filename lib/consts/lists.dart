@@ -26,13 +26,15 @@ var iconTitleList = [
 ];
 
 var settingList = [
-  AppStrings.changePassword,
+
   AppStrings.termsCondition,
-  AppStrings.signOut
+  AppStrings.aboutUs,
+  AppStrings.signOut,
+
 ];
 
 var settingListIcon = [
-  Icons.lock,
   Icons.note,
+  Icons.info_rounded,
   Icons.logout
 ];

@@ -29,6 +29,7 @@ class AppStrings{
   stomach = "Stomach",
   changePassword = "Change Password",
   termsCondition = "Terms & Condition",
+  aboutUs = 'About US',
   signOut = "SignOut",
   teeth = "Teeth";
 

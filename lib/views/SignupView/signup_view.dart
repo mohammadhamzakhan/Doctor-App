@@ -1,19 +1,33 @@
 import 'package:doctor_app/consts/images.dart';
 import 'package:doctor_app/consts/strings.dart';
+import 'package:doctor_app/controllers/auth_controller.dart';
 import 'package:doctor_app/res/components/custom_elevated_button.dart';
 import 'package:doctor_app/res/components/custom_text_button.dart';
 import 'package:doctor_app/res/components/custom_textfield.dart';
+import 'package:doctor_app/views/Home/home.dart';
+import 'package:doctor_app/views/Home/home_view.dart';
 import 'package:doctor_app/views/LoginView/login_view.dart';
+import 'package:doctor_app/views/appointment_view/appointment_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
-class SignupView extends StatelessWidget {
- const SignupView({super.key});
+class SignupView extends StatefulWidget {
+
+   SignupView({super.key});
 
   @override
+  State<SignupView> createState() => _SignupViewState();
+}
+
+class _SignupViewState extends State<SignupView> {
+  var isDoctor = false;
+  @override
   Widget build(BuildContext context) {
+    var controller = Get.put(AuthController());
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: 30),
@@ -34,7 +48,6 @@ class SignupView extends StatelessWidget {
                 ),
               ),
               const Gap(5),
-
             ]),
             const Gap(30),
             Expanded(
@@ -42,13 +55,72 @@ class SignupView extends StatelessWidget {
                 child: Form(
                   child: Column(
                     children: [
-                      CustomTextField(hint: "Name"),
+                      CustomTextField(
+                        hint: "Name",
+                        textController: controller.fullNameController,
+                      ),
                       const Gap(15),
-                      CustomTextField(hint: "Email"),
+                      CustomTextField(
+                        hint: "Email",
+                        textController: controller.emailController,
+                      ),
                       const Gap(15),
-                      CustomTextField(hint: "Password"),
+                      CustomTextField(
+                        hint: "Password",
+                        textController: controller.passwordController,
+                      ),
+                      const Gap(15),
+                     SwitchListTile(value: isDoctor, onChanged: (newValue){
+                       setState(() {
+                        isDoctor = newValue;
+                       });
+                     },title: "Sign Up as a doctor".text.make(),),
+                     Visibility(
+                       visible: isDoctor,
+                       child: Column(
+                         children: [
+                           CustomTextField(
+                             hint: "About",
+                             textController: controller.aboutController,
+                           ),
+                           const Gap(15),
+                           CustomTextField(
+                             hint: "Category",
+                             textController: controller.categoryController,
+                           ),
+                           const Gap(15),
+                           CustomTextField(
+                             hint: "Service",
+                             textController: controller.serviceController,
+                           ),
+                           const Gap(15),
+                           CustomTextField(
+                             hint: "Address",
+                             textController: controller.addressController,
+                           ),
+                           const Gap(15),
+                           CustomTextField(
+                             hint: "Phone Number",
+                             textController: controller.phoneController,
+                           ),
+                           const Gap(15),
+                           CustomTextField(
+                             hint: "Timing",
+                             textController: controller.timingController,
+                           ),
+
+                         ],
+                       ),
+                     ),
                       const Gap(40),
-                      CustomElevatedButton(buttonText: "Signup", onTap: () {}),
+                      CustomElevatedButton(
+                          buttonText: "Signup",
+                          onTap: () async {
+                            await controller.signupUser(isDoctor);
+                            if (controller.userCredential != null) {
+                              Get.offAll(()=>AppointmentView);
+                            }
+                          }),
                       const Gap(30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +134,7 @@ class SignupView extends StatelessWidget {
                             onPressed: () {
                               Get.back();
                             },
-                            child: const  Text("Login"),
+                            child: const Text("Login"),
                           ),
                         ],
                       )

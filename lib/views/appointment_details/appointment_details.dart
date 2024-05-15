@@ -1,21 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class AppointmentDetails extends StatelessWidget {
-  const AppointmentDetails({super.key});
+  final DocumentSnapshot doc;
+  const AppointmentDetails({super.key,required this.doc});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text("Appointments Details",style: TextStyle(
+        title:  Text(doc['appWithName'],style: TextStyle(
             color: Colors.white
         ),
         ),
       ),
-      body: const Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body:  Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
            Text(
             "Select appointment day",
@@ -23,7 +25,7 @@ class AppointmentDetails extends StatelessWidget {
           ),
           const Gap(10),
          Text(
-            "Selected Day",
+            doc['appDay'],
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           const Gap(20),
@@ -33,7 +35,7 @@ class AppointmentDetails extends StatelessWidget {
           ),
           const Gap(10),
           Text(
-            "Selected time",
+            doc['appTime'],
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           const Gap(20),
@@ -43,7 +45,7 @@ class AppointmentDetails extends StatelessWidget {
           ),
           const Gap(10),
           Text(
-            "Mobile Number",
+            doc['appPhone'],
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           const Gap(20),
@@ -53,7 +55,7 @@ class AppointmentDetails extends StatelessWidget {
           ),
           const Gap(10),
           Text(
-            "Name",
+            doc['appName'],
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           const Gap(20),
@@ -63,7 +65,7 @@ class AppointmentDetails extends StatelessWidget {
           ),
           const Gap(10),
           Text(
-            "Message",
+            doc['appMessage'],
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ],

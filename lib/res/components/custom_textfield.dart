@@ -5,15 +5,19 @@ class CustomTextField extends StatefulWidget {
   final Color borderColor;
   final Color? textFieldColor;
   final Color enableColor;
-  TextEditingController? textController;
-
+  final TextEditingController? textController;
+  final Color inputColor;
+  final IconButton? iconButton;
   CustomTextField(
       {super.key,
       required this.hint,
       this.textController,
+        this.iconButton,
       this.borderColor = Colors.black,
       this.enableColor = Colors.black,
-      this.textFieldColor
+      this.textFieldColor,
+      this.inputColor = Colors.black
+
       });
 
   @override
@@ -24,17 +28,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyle(
+        color:widget.inputColor
+      ),
+      controller: widget.textController,
       cursorColor: Colors.blue,
-
-
       decoration: InputDecoration(
         isDense: true,
-
-
-        hintStyle: TextStyle(
-          color: widget.textFieldColor
-        ),
-
+        suffixIcon: widget.iconButton,
+        hintStyle: TextStyle(color: widget.textFieldColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
@@ -43,10 +45,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderSide: BorderSide(color: widget.enableColor),
         ),
         hintText: widget.hint,
-         focusedBorder: OutlineInputBorder(
-           borderSide: BorderSide(color: widget.borderColor),
-           borderRadius: BorderRadius.circular(30.0),
-         ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: widget.borderColor),
+          borderRadius: BorderRadius.circular(30.0),
+        ),
       ),
     );
   }

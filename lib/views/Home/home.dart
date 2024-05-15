@@ -4,27 +4,16 @@ import 'package:doctor_app/views/category/category.dart';
 import 'package:doctor_app/views/setting/setting_view.dart';
 import 'package:flutter/material.dart';
 
-import '../LoginView/login_view.dart';
-
-class Bottom extends StatefulWidget {
-  const Bottom({super.key});
+class Home extends StatefulWidget {
+  const Home({Key? key});
 
   @override
-  State<Bottom> createState() => _BottomState();
+  State<Home> createState() => _HomeState();
 }
 
-class _BottomState extends State<Bottom> {
-
+class _HomeState extends State<Home> {
   int selectedIndex = 0;
-  List screenList = [
-    HomeView(),
-    AppointmentView(),
-    Category(),
-    LoginView(),
-    SettingView()
-  ];
-
-
+  List screenList = [HomeView(), AppointmentView(), Category(), SettingView()];
 
   @override
   Widget build(BuildContext context) {
@@ -34,24 +23,31 @@ class _BottomState extends State<Bottom> {
         selectedItemColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.blue,
-        selectedLabelStyle: TextStyle(
-          color: Colors.white
-        ),
-        selectedIconTheme: IconThemeData(
-          color: Colors.white
-        ),
+        selectedLabelStyle: TextStyle(color: Colors.white),
+        selectedIconTheme: IconThemeData(color: Colors.white),
         currentIndex: selectedIndex,
-        onTap: (value){
+        onTap: (value) {
           setState(() {
             selectedIndex = value;
           });
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.book),label: "Appointment"),
-          BottomNavigationBarItem(icon: Icon(Icons.category),label: "Category"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Person"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings),label: "Setting"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 28),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book, size: 28),
+            label: "Appointment",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category, size: 28),
+            label: "Category",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings, size: 28),
+            label: "Setting",
+          ),
         ],
       ),
     );

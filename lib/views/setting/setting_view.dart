@@ -24,7 +24,7 @@ class _SettingViewState extends State<SettingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+       // backgroundColor: Colors.blue,
         title: Text(
           "Setting",
           style: TextStyle(color: Colors.white),

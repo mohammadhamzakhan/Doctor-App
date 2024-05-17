@@ -5,7 +5,6 @@ import 'package:doctor_app/res/components/custom_elevated_button.dart';
 import 'package:doctor_app/res/components/custom_text_button.dart';
 import 'package:doctor_app/res/components/custom_textfield.dart';
 import 'package:doctor_app/views/Home/home.dart';
-import 'package:doctor_app/views/Home/home_view.dart';
 import 'package:doctor_app/views/SignupView/signup_view.dart';
 import 'package:doctor_app/views/appointment_view/appointment_view.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   var isDoctor = false;
- // bool loginHidden = true;
+
+
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(AuthController());
@@ -57,44 +57,44 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     children: [
                       CustomTextField(
-
                         hint: "Email",
                         textController: controller.emailController,
                       ),
                       const Gap(15),
                       CustomTextField(
-                       // obsecureText: loginHidden,
+                        // obsecureText: loginHidden,
                         hint: "Password",
                         textController: controller.passwordController,
                       ),
                       const Gap(7),
-                      SwitchListTile(value: isDoctor, onChanged: (newValue){
-                        setState(() {
-                          isDoctor = newValue;
-                        });
-
-                      },title: "Sign in as a doctor".text.make(),),
-
+                      SwitchListTile(
+                        value: isDoctor,
+                        onChanged: (newValue) {
+                          setState(() {
+                            isDoctor = newValue;
+                          });
+                        },
+                        title: "Sign in as a doctor".text.make(),
+                      ),
                       Align(
                         alignment: Alignment.centerRight,
                         child: CustomTextButton(
-                            buttonText: "ForgotPassword?", onTap: () {
-                              Get.to(()=>ForgotPassword());
-
-                        }),
-
+                            buttonText: "ForgotPassword?",
+                            onTap: () {
+                              Get.to(() => ForgotPassword());
+                            }),
                       ),
                       const Gap(30),
                       CustomElevatedButton(
                           buttonText: "Login",
                           onTap: () async {
                             await controller.loginUser();
-                            if(controller.userCredential != null) {
-                              if(isDoctor){
-                              //  signing as a doctor
+                            if (controller.userCredential != null) {
+                              if (isDoctor) {
+                                //  signing as a doctor
                                 Get.to((AppointmentView()));
-                              }else{
-                               // signing as a user
+                              } else {
+                                // signing as a user
                                 Get.to((Home()));
                               }
                             }
@@ -110,7 +110,7 @@ class _LoginViewState extends State<LoginView> {
                           const Gap(10),
                           TextButton(
                             onPressed: () {
-                              Get.to(() =>  SignupView());
+                              Get.to(() => SignupView());
                             },
                             child: Text("SignUp"),
                           ),

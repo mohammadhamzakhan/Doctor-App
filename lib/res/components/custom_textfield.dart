@@ -38,16 +38,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: widget.iconButton,
         hintStyle: TextStyle(color: widget.textFieldColor),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(15.0),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(15.0),
           borderSide: BorderSide(color: widget.enableColor),
         ),
         hintText: widget.hint,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: widget.borderColor),
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(15.0),
         ),
       ),
     );

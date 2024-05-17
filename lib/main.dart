@@ -12,6 +12,8 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +21,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return  GetMaterialApp(
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.grey.shade500,
+
+        ),
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor: Colors.grey.shade500
+        )
+      ),
+
       debugShowCheckedModeBanner: false,
       home: WaitingScreen(),
     );

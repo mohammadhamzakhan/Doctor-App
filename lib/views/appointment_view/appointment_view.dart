@@ -17,7 +17,7 @@ class AppointmentView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+       // backgroundColor: Colors.blue,
         title: const Text("Appointments",style: TextStyle(
             color: Colors.white
         ),

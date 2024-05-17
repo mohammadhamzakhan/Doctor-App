@@ -6,16 +6,13 @@ import 'package:doctor_app/res/components/custom_textfield.dart';
 import 'package:doctor_app/views/category_detail_view/category_details_view.dart';
 import 'package:doctor_app/views/login_view_doctor/login_view_doctor.dart';
 import 'package:doctor_app/views/search_view/search_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-
 import '../../controllers/setting_controller.dart';
 
 class HomeView extends StatelessWidget {
-  HomeView({super.key,});
+  HomeView({super.key});
   final List symptoms = [
     "Temperature",
     "Snuffle",
@@ -29,11 +26,15 @@ class HomeView extends StatelessWidget {
     var controller2 = Get.put(SettingController());
     var controller = Get.put(HomeController());
 
+    Color primaryColor = Colors.grey.shade200; // Define primary color
+    Color secondaryColor = Colors.grey.shade600; // Define secondary color
+    Color textColor = Colors.black; // Define text color
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+      //  backgroundColor: Colors.grey.shade500,
         title: Text(
-          controller2.username.value,
+          'Welcome'+" "+controller2.username.value,
           style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -43,7 +44,7 @@ class HomeView extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(13),
-              color: Colors.blue,
+              //color: primaryColor,
               child: Row(
                 children: [
                   Expanded(
@@ -53,18 +54,18 @@ class HomeView extends StatelessWidget {
                         onPressed: () {
                           Get.to(() => SearchView(
                               searchQuery:
-                                  controller.searchQueryController.text));
+                              controller.searchQueryController.text));
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.search,
-                          color: Colors.white,
+                          color: secondaryColor,
                         ),
                       ),
                       hint: "Search Doctor",
-                      borderColor: Colors.white,
-                      enableColor: Colors.white,
-                      textFieldColor: Colors.white,
-                      inputColor: Colors.white,
+                      borderColor: secondaryColor,
+                      enableColor: secondaryColor,
+                      textFieldColor: secondaryColor,
+                      inputColor: secondaryColor,
                     ),
                   ),
                 ],
@@ -76,8 +77,8 @@ class HomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(5.0),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
                     child: Text(
                       "Categories",
                       style: TextStyle(
@@ -87,7 +88,7 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Gap(10),
+                  const SizedBox(height: 10),
                   SizedBox(
                     height: 100,
                     child: ListView.builder(
@@ -95,7 +96,7 @@ class HomeView extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: 7,
                       itemBuilder: (context, index) {
-                        return InkWell(
+                        return GestureDetector(
                           onTap: () {
                             Get.to(() => CategoryDetailsView(
                                 catName: iconTitleList[index]));
@@ -104,21 +105,20 @@ class HomeView extends StatelessWidget {
                             padding: const EdgeInsets.all(10),
                             margin: const EdgeInsets.only(right: 8),
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: secondaryColor.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
                               children: [
-                                Expanded(
-                                  child: Image.asset(
-                                    iconList[index],
-                                    width: 50,
-                                  ),
+                                Image.asset(
+                                  iconList[index],
+                                  width: 50,
+                                  height: 50,
                                 ),
-                                const Gap(10),
+                                const SizedBox(height: 5),
                                 Text(
                                   iconTitleList[index],
-                                  style: const TextStyle(color: Colors.white),
+                                  style: TextStyle(color: textColor),
                                 )
                               ],
                             ),
@@ -192,7 +192,9 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   const Gap(5),
-                  FutureBuilder<QuerySnapshot>(
+                  SizedBox(
+                    height: 300, // Set a fixed height for the grid view
+                    child: FutureBuilder<QuerySnapshot>(
                       future: controller.getDoctorList(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -202,12 +204,12 @@ class HomeView extends StatelessWidget {
                           );
                         } else {
                           var data = snapshot.data?.docs;
-                          print(data?.length.toString());
                           return GridView.builder(
+                            physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                            SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               crossAxisSpacing: 10.0,
                               mainAxisSpacing: 10.0,
@@ -216,11 +218,9 @@ class HomeView extends StatelessWidget {
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
-                                  Get.to(
-                                      (LoginViewDoctor(doc: data![index])));
+                                  Get.to((LoginViewDoctor(doc: data![index])));
                                 },
                                 child: Container(
-                                  //height: double.infinity,
                                   decoration: BoxDecoration(
                                     color: Colors.grey.shade300,
                                     borderRadius: BorderRadius.circular(10),
@@ -250,10 +250,12 @@ class HomeView extends StatelessWidget {
                             },
                           );
                         }
-                      }),
+                      },
+                    ),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

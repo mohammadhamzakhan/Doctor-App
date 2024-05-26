@@ -75,3 +75,6 @@ flutter:
     - family: Galada
       fonts:
         - asset: assets/fonts/Galada-Regular.ttf
+    - family: RobotoSlab
+      fonts:
+        - asset: assets/fonts/RobotoSlab-VariableFont_wght.ttf

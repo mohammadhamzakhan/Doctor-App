@@ -3,7 +3,6 @@ import 'package:doctor_app/views/setting/terms_conditions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../../consts/images.dart';
 import '../../consts/lists.dart';
 import '../../controllers/auth_controller.dart';
@@ -24,7 +23,6 @@ class _SettingViewState extends State<SettingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       // backgroundColor: Colors.blue,
         title: Text(
           "Setting",
           style: TextStyle(color: Colors.white),
@@ -70,7 +68,12 @@ class _SettingViewState extends State<SettingView> {
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  AuthController().signout();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      elevation: 1,
+                                      content: Text('Signout Sucessfully'),),
+                                  );
+                                  //AuthController().signout();
                                   Get.offAll(() => LoginView());
                                 },
                                 child: Text("Sign Out"),

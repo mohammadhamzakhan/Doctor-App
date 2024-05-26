@@ -47,7 +47,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 emailController.clear();
               },
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal, foregroundColor: Colors.white),
+                  backgroundColor: Colors.purple, foregroundColor: Colors.white),
               child: const Text("Forgot Password"),
             ),
           ),

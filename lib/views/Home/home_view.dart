@@ -3,6 +3,7 @@ import 'package:doctor_app/consts/images.dart';
 import 'package:doctor_app/consts/lists.dart';
 import 'package:doctor_app/controllers/home_controller.dart';
 import 'package:doctor_app/res/components/custom_textfield.dart';
+import 'package:doctor_app/views/Home/symptoms_view.dart';
 import 'package:doctor_app/views/category_detail_view/category_details_view.dart';
 import 'package:doctor_app/views/login_view_doctor/login_view_doctor.dart';
 import 'package:doctor_app/views/search_view/search_view.dart';
@@ -32,9 +33,8 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-      //  backgroundColor: Colors.grey.shade500,
         title: Text(
-          'Welcome'+" "+controller2.username.value,
+          'Welcome ${controller2.username.value}',
           style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -44,7 +44,6 @@ class HomeView extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(13),
-              //color: primaryColor,
               child: Row(
                 children: [
                   Expanded(
@@ -53,8 +52,7 @@ class HomeView extends StatelessWidget {
                       iconButton: IconButton(
                         onPressed: () {
                           Get.to(() => SearchView(
-                              searchQuery:
-                              controller.searchQueryController.text));
+                              searchQuery: controller.searchQueryController.text));
                         },
                         icon: Icon(
                           Icons.search,
@@ -106,7 +104,7 @@ class HomeView extends StatelessWidget {
                             margin: const EdgeInsets.only(right: 8),
                             decoration: BoxDecoration(
                               color: secondaryColor.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
                               children: [
@@ -147,28 +145,33 @@ class HomeView extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: symptoms.length,
                       itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF4F6FA),
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 4,
-                                spreadRadius: 2,
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Text(
-                              symptoms[index],
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black54,
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(() => SymptomsView(symptom: symptoms[index]));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF4F6FA),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 4,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                symptoms[index],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black54,
+                                ),
                               ),
                             ),
                           ),
@@ -225,18 +228,19 @@ class HomeView extends StatelessWidget {
                                     color: Colors.grey.shade300,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  margin: const EdgeInsets.all(5),
+                                  margin: const EdgeInsets.all(2),
                                   child: Column(
                                     children: [
                                       Container(
                                         color: Colors.white70,
-                                        width: 200,
-                                        height: 130,
+                                        width: 180,
+                                        height: 120,
                                         child: Image.asset(
                                           AppAssets.signUp,
                                           fit: BoxFit.fill,
                                         ),
                                       ),
+                                      Gap(10),
                                       Text(
                                         data![index]['docName'],
                                       ),

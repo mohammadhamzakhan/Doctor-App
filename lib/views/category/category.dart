@@ -43,12 +43,9 @@ class Category extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      Colors.black26,
-                      Colors.grey.shade300
-                    ]),
-
-
+                    gradient:LinearGradient(
+                        begin: Alignment.topLeft,end: Alignment.topRight,
+                        colors: [Colors.grey.shade300,Colors.black12]),
                     borderRadius: BorderRadius.circular(19),
                   ),
                   child: Column(

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 class AboutUsScreeen extends StatelessWidget {
+  const AboutUsScreeen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         centerTitle: true,
-        title: Text('About Us'),
+        title: const Text('About Us'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: ListView(
-          children: [
+          children: const [
             Text(
               'About Us',
               style: TextStyle(

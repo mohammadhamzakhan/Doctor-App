@@ -8,34 +8,61 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? textController;
   final Color inputColor;
   final IconButton? iconButton;
-  CustomTextField(
-      {super.key,
-      required this.hint,
-      this.textController,
-        this.iconButton,
-      this.borderColor = Colors.black,
-      this.enableColor = Colors.black,
-      this.textFieldColor,
-      this.inputColor = Colors.black
+  final bool obscureText;
+  final String? Function(String?)? validator; // Validator function
 
-      });
+  CustomTextField({
+    super.key,
+    required this.hint,
+    this.textController,
+    this.iconButton,
+    this.borderColor = Colors.black,
+    this.enableColor = Colors.black,
+    this.textFieldColor,
+    this.inputColor = Colors.black,
+    this.obscureText = false,
+    this.validator, // Include validator in the constructor
+  });
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  late bool _isObscured;
+
+  @override
+  void initState() {
+    super.initState();
+    _isObscured = widget.obscureText;
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isObscured = !_isObscured;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       style: TextStyle(
-        color:widget.inputColor
+        color: widget.inputColor,
       ),
       controller: widget.textController,
       cursorColor: Colors.blue,
+      obscureText: _isObscured,
       decoration: InputDecoration(
         isDense: true,
-        suffixIcon: widget.iconButton,
+        suffixIcon: widget.obscureText
+            ? IconButton(
+          icon: Icon(
+            _isObscured ? Icons.visibility_off : Icons.visibility,
+            color: widget.inputColor,
+          ),
+          onPressed: _togglePasswordVisibility,
+        )
+            : widget.iconButton,
         hintStyle: TextStyle(color: widget.textFieldColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -50,6 +77,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(15.0),
         ),
       ),
+      validator: widget.validator, // Assign validator to the TextFormField
     );
   }
 }

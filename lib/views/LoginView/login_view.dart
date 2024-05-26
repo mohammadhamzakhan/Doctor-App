@@ -1,29 +1,29 @@
-import 'package:doctor_app/consts/images.dart';
-import 'package:doctor_app/consts/strings.dart';
-import 'package:doctor_app/controllers/auth_controller.dart';
-import 'package:doctor_app/res/components/custom_elevated_button.dart';
-import 'package:doctor_app/res/components/custom_text_button.dart';
-import 'package:doctor_app/res/components/custom_textfield.dart';
-import 'package:doctor_app/views/Home/home.dart';
-import 'package:doctor_app/views/SignupView/signup_view.dart';
-import 'package:doctor_app/views/appointment_view/appointment_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+import '../../consts/images.dart';
+import '../../consts/strings.dart';
+import '../../controllers/auth_controller.dart';
+import '../../res/components/custom_elevated_button.dart';
+import '../../res/components/custom_text_button.dart';
+import '../../res/components/custom_textfield.dart';
+import '../Home/home.dart';
+import '../SignupView/signup_view.dart';
+import '../appointment_view/appointment_view.dart';
 import '../forgot_password/forgot_password_screen.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _LoginViewState();
 }
 
 class _LoginViewState extends State<LoginView> {
-  var isDoctor = false;
+  final _formKey = GlobalKey<FormState>(); // Form key for validation
 
+  var isDoctor = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,29 +42,48 @@ class _LoginViewState extends State<LoginView> {
               const Gap(20),
               Text(
                 AppStrings.welcomeBack,
-                style: const TextStyle(fontFamily: "Lobster", fontSize: 30),
+                style: const TextStyle(fontFamily: "Lobster", fontSize: 40,color: Colors.green),
               ),
               const Gap(5),
               Text(
                 AppStrings.weAreExcited,
-                style: const TextStyle(fontFamily: "Lobster", fontSize: 25),
+                style: const TextStyle(fontFamily: "Lobster", fontSize: 25,color: Colors.black87),
               )
             ]),
             const Gap(30),
             Expanded(
               child: SingleChildScrollView(
                 child: Form(
+                  key: _formKey, // Assigning form key
                   child: Column(
                     children: [
                       CustomTextField(
                         hint: "Email",
                         textController: controller.emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          if (!GetUtils.isEmail(value)) {
+                            return 'Please enter a valid email address';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(15),
                       CustomTextField(
-                        // obsecureText: loginHidden,
+                        obscureText: true,
                         hint: "Password",
                         textController: controller.passwordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          if (value.length < 6) {
+                            return 'Password should be at least 6 characters long';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(7),
                       SwitchListTile(
@@ -79,40 +98,45 @@ class _LoginViewState extends State<LoginView> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: CustomTextButton(
-                            buttonText: "ForgotPassword?",
-                            onTap: () {
-                              Get.to(() => ForgotPassword());
-                            }),
+                          buttonText: "ForgotPassword?",
+                          onTap: () {
+                            Get.to(() => const ForgotPassword());
+                          },
+                        ),
                       ),
                       const Gap(30),
                       CustomElevatedButton(
-                          buttonText: "Login",
-                          onTap: () async {
+                        buttonText: "Login",
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            // Form is valid, proceed with login
                             await controller.loginUser();
                             if (controller.userCredential != null) {
                               if (isDoctor) {
                                 //  signing as a doctor
-                                Get.to((AppointmentView()));
+                                Get.to(() => const AppointmentView());
                               } else {
                                 // signing as a user
-                                Get.to((Home()));
+                                Get.to(() => const Home());
                               }
                             }
-                          }),
+                          }
+                        },
+                      ),
                       const Gap(30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             AppStrings.dontHaveAccount,
-                            style: TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 15),
                           ),
                           const Gap(10),
                           TextButton(
                             onPressed: () {
-                              Get.to(() => SignupView());
+                              Get.to(() => const SignupView());
                             },
-                            child: Text("SignUp"),
+                            child: const Text("SignUp"),
                           ),
                         ],
                       )

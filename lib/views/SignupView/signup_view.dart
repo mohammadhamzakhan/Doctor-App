@@ -2,11 +2,7 @@ import 'package:doctor_app/consts/images.dart';
 import 'package:doctor_app/consts/strings.dart';
 import 'package:doctor_app/controllers/auth_controller.dart';
 import 'package:doctor_app/res/components/custom_elevated_button.dart';
-import 'package:doctor_app/res/components/custom_text_button.dart';
 import 'package:doctor_app/res/components/custom_textfield.dart';
-import 'package:doctor_app/views/Home/home.dart';
-import 'package:doctor_app/views/Home/home_view.dart';
-import 'package:doctor_app/views/LoginView/login_view.dart';
 import 'package:doctor_app/views/appointment_view/appointment_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +12,16 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignupView extends StatefulWidget {
-
-   SignupView({super.key});
+  const SignupView({Key? key}) : super(key: key);
 
   @override
   State<SignupView> createState() => _SignupViewState();
 }
 
 class _SignupViewState extends State<SignupView> {
+  final _formKey = GlobalKey<FormState>(); // Form key for validation
   var isDoctor = false;
+
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(AuthController());
@@ -53,80 +50,109 @@ class _SignupViewState extends State<SignupView> {
             Expanded(
               child: SingleChildScrollView(
                 child: Form(
+                  key: _formKey, // Assigning form key
                   child: Column(
                     children: [
                       CustomTextField(
                         hint: "Name",
                         textController: controller.fullNameController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(15),
                       CustomTextField(
                         hint: "Email",
                         textController: controller.emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          // Add email validation logic if needed
+                          return null;
+                        },
                       ),
                       const Gap(15),
                       CustomTextField(
+                        obscureText: true,
                         hint: "Password",
                         textController: controller.passwordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          // Add password validation logic if needed
+                          return null;
+                        },
                       ),
                       const Gap(15),
-                     SwitchListTile(value: isDoctor, onChanged: (newValue){
-                       setState(() {
-                        isDoctor = newValue;
-                       });
-                     },title: "Sign Up as a doctor".text.make(),),
-                     Visibility(
-                       visible: isDoctor,
-                       child: Column(
-                         children: [
-                           CustomTextField(
-                             hint: "About",
-                             textController: controller.aboutController,
-                           ),
-                           const Gap(15),
-                           CustomTextField(
-                             hint: "Category",
-                             textController: controller.categoryController,
-                           ),
-                           const Gap(15),
-                           CustomTextField(
-                             hint: "Service",
-                             textController: controller.serviceController,
-                           ),
-                           const Gap(15),
-                           CustomTextField(
-                             hint: "Address",
-                             textController: controller.addressController,
-                           ),
-                           const Gap(15),
-                           CustomTextField(
-                             hint: "Phone Number",
-                             textController: controller.phoneController,
-                           ),
-                           const Gap(15),
-                           CustomTextField(
-                             hint: "Timing",
-                             textController: controller.timingController,
-                           ),
-
-                         ],
-                       ),
-                     ),
+                      SwitchListTile(
+                        value: isDoctor,
+                        onChanged: (newValue) {
+                          setState(() {
+                            isDoctor = newValue;
+                          });
+                        },
+                        title: "Sign Up as a doctor".text.make(),
+                      ),
+                      Visibility(
+                        visible: isDoctor,
+                        child: Column(
+                          children: [
+                            CustomTextField(
+                              hint: "About",
+                              textController: controller.aboutController,
+                            ),
+                            const Gap(15),
+                            CustomTextField(
+                              hint: "Category",
+                              textController: controller.categoryController,
+                            ),
+                            const Gap(15),
+                            CustomTextField(
+                              hint: "Service",
+                              textController: controller.serviceController,
+                            ),
+                            const Gap(15),
+                            CustomTextField(
+                              hint: "Address",
+                              textController: controller.addressController,
+                            ),
+                            const Gap(15),
+                            CustomTextField(
+                              hint: "Phone Number",
+                              textController: controller.phoneController,
+                            ),
+                            const Gap(15),
+                            CustomTextField(
+                              hint: "Timing",
+                              textController: controller.timingController,
+                            ),
+                          ],
+                        ),
+                      ),
                       const Gap(40),
                       CustomElevatedButton(
-                          buttonText: "Signup",
-                          onTap: () async {
+                        buttonText: "Signup",
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            // Form is valid, proceed with signup
                             await controller.signupUser(isDoctor);
                             if (controller.userCredential != null) {
-                              Get.offAll(()=>AppointmentView);
+                              Get.offAll(() => AppointmentView());
                             }
-                          }),
+                          }
+                        },
+                      ),
                       const Gap(30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            AppStrings.dontHaveAccount,
+                            AppStrings.alreadyHaveAccount,
                             style: const TextStyle(fontSize: 15),
                           ),
                           const Gap(10),

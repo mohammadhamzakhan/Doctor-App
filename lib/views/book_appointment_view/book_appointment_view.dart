@@ -77,9 +77,7 @@ class BookAppointmentView extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your mobile number';
                   }
-                  if (value.length != 10) {
-                    return 'Mobile number should be 10 digits';
-                  }
+
                   return null;
                 },
               ),

@@ -4,7 +4,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Function()? onTap;
   final String buttonText;
 
-  CustomElevatedButton(
+  const CustomElevatedButton(
       {super.key, required this.buttonText, required this.onTap});
 
   @override
@@ -13,11 +13,11 @@ class CustomElevatedButton extends StatelessWidget {
       width: 200,
       child: ElevatedButton(
         onPressed: onTap,
-        child: Text(buttonText),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.purple,
           foregroundColor: Colors.white,
         ),
+        child: Text(buttonText),
       ),
     );
   }

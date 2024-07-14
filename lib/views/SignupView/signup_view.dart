@@ -4,15 +4,13 @@ import 'package:doctor_app/controllers/auth_controller.dart';
 import 'package:doctor_app/res/components/custom_elevated_button.dart';
 import 'package:doctor_app/res/components/custom_textfield.dart';
 import 'package:doctor_app/views/appointment_view/appointment_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignupView extends StatefulWidget {
-  const SignupView({Key? key}) : super(key: key);
+  const SignupView({super.key});
 
   @override
   State<SignupView> createState() => _SignupViewState();
@@ -27,7 +25,7 @@ class _SignupViewState extends State<SignupView> {
     var controller = Get.put(AuthController());
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 30),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -142,7 +140,7 @@ class _SignupViewState extends State<SignupView> {
                             // Form is valid, proceed with signup
                             await controller.signupUser(isDoctor);
                             if (controller.userCredential != null) {
-                              Get.offAll(() => AppointmentView());
+                              Get.offAll(() => const AppointmentView());
                             }
                           }
                         },

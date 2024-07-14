@@ -11,7 +11,7 @@ class CustomTextField extends StatefulWidget {
   final bool obscureText;
   final String? Function(String?)? validator; // Validator function
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.hint,
     this.textController,
@@ -56,12 +56,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         isDense: true,
         suffixIcon: widget.obscureText
             ? IconButton(
-          icon: Icon(
-            _isObscured ? Icons.visibility_off : Icons.visibility,
-            color: widget.inputColor,
-          ),
-          onPressed: _togglePasswordVisibility,
-        )
+                icon: Icon(
+                  _isObscured ? Icons.visibility_off : Icons.visibility,
+                  color: widget.inputColor,
+                ),
+                onPressed: _togglePasswordVisibility,
+              )
             : widget.iconButton,
         hintStyle: TextStyle(color: widget.textFieldColor),
         border: OutlineInputBorder(

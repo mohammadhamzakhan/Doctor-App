@@ -14,7 +14,7 @@ import '../appointment_view/appointment_view.dart';
 import '../forgot_password/forgot_password_screen.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -42,12 +42,14 @@ class _LoginViewState extends State<LoginView> {
               const Gap(20),
               Text(
                 AppStrings.welcomeBack,
-                style: const TextStyle(fontFamily: "Lobster", fontSize: 40,color: Colors.green),
+                style: const TextStyle(
+                    fontFamily: "Lobster", fontSize: 40, color: Colors.green),
               ),
               const Gap(5),
               Text(
                 AppStrings.weAreExcited,
-                style: const TextStyle(fontFamily: "Lobster", fontSize: 25,color: Colors.black87),
+                style: const TextStyle(
+                    fontFamily: "Lobster", fontSize: 25, color: Colors.black87),
               )
             ]),
             const Gap(30),

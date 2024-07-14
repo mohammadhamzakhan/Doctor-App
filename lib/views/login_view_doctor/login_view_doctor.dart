@@ -13,8 +13,10 @@ class LoginViewDoctor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle text = TextStyle(fontFamily: 'RobotoSlab', color: Colors.blue, fontSize: 25);
-    TextStyle text2 = TextStyle(fontFamily: 'RobotoSlab', color: Colors.red, fontSize: 16);
+    TextStyle text = const TextStyle(
+        fontFamily: 'RobotoSlab', color: Colors.blue, fontSize: 25);
+    TextStyle text2 = const TextStyle(
+        fontFamily: 'RobotoSlab', color: Colors.red, fontSize: 16);
 
     return Scaffold(
       appBar: AppBar(
@@ -120,7 +122,7 @@ class LoginViewDoctor extends StatelessWidget {
           buttonText: "Book an appointment",
           onTap: () {
             Get.to(
-                  () => BookAppointmentView(
+              () => BookAppointmentView(
                 docId: doc['docId'],
                 docName: doc['docName'],
               ),

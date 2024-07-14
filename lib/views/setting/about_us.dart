@@ -12,7 +12,7 @@ class AboutUsScreeen extends StatelessWidget {
         title: const Text('About Us'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: const [
             Text(

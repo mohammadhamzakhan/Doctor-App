@@ -22,26 +22,29 @@ class AuthController extends GetxController {
   UserCredential? userCredential;
 
   isUserAlreadyLogin() async {
-    await FirebaseAuth.instance.authStateChanges().listen((User? user) async {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
       if (user != null) {
-        var data =
-        await FirebaseFirestore.instance.collection('doctors').doc(user.uid).get();
+        var data = await FirebaseFirestore.instance
+            .collection('doctors')
+            .doc(user.uid)
+            .get();
         var isDoc = data.data()?['docName'] != null;
 
         if (isDoc) {
-          Get.offAll(() => AppointmentView(isDoctor: true));
+          Get.offAll(() => const AppointmentView(isDoctor: true));
         } else {
-          Get.offAll(() => Home());
+          Get.offAll(() => const Home());
         }
       } else {
-        Get.offAll(() => LoginView());
+        Get.offAll(() => const LoginView());
       }
     });
   }
 
   loginUser() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -49,55 +52,51 @@ class AuthController extends GetxController {
 
       this.userCredential = userCredential;
     } catch (e) {
-      Fluttertoast.showToast( msg: e.toString());
+      Fluttertoast.showToast(msg: e.toString());
       Fluttertoast.showToast(msg: "Login failed: $e");
     }
   }
-
 
   signupUser(bool isDoctor) async {
     userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text, password: passwordController.text);
     if (userCredential != null) {
       await storeUserData(userCredential!.user!.uid, fullNameController.text,
-          emailController.text,isDoctor);
+          emailController.text, isDoctor);
     }
   }
 
-
-
-
-  storeUserData(String uid, String fullName, String email,bool isDoctor) async {
-    var store = FirebaseFirestore.instance.collection(isDoctor ? 'doctors':'users').doc(uid);
-    if(isDoctor){
+  storeUserData(
+      String uid, String fullName, String email, bool isDoctor) async {
+    var store = FirebaseFirestore.instance
+        .collection(isDoctor ? 'doctors' : 'users')
+        .doc(uid);
+    if (isDoctor) {
       await store.set({
-        'docAbout':aboutController.text,
-        'docCategory':categoryController.text,
-        'docService':serviceController.text,
-        'docAddress':addressController.text,
-        'docPhone':phoneController.text,
-        'docTiming':timingController.text,
-        'docName':fullName,
-        'docId':FirebaseAuth.instance.currentUser?.uid,
-        'docRating':1,
-        'docEmail':email
-
+        'docAbout': aboutController.text,
+        'docCategory': categoryController.text,
+        'docService': serviceController.text,
+        'docAddress': addressController.text,
+        'docPhone': phoneController.text,
+        'docTiming': timingController.text,
+        'docName': fullName,
+        'docId': FirebaseAuth.instance.currentUser?.uid,
+        'docRating': 1,
+        'docEmail': email
       });
-
-    }else{
+    } else {
       await store.set({'fullName': fullName, 'email': email});
     }
-
   }
 
   void signout() async {
-  try {
-  await FirebaseAuth.instance.signOut();
-  Fluttertoast.showToast(msg: "Sign out successful");
-  } catch (e) {
-  print("Sign out error: $e");
-  Fluttertoast.showToast(msg: "Sign out failed: $e");
+    try {
+      await FirebaseAuth.instance.signOut();
+      Fluttertoast.showToast(msg: "Sign out successful");
+    } catch (e) {
+      // ignore: avoid_print
+      print("Sign out error: $e");
+      Fluttertoast.showToast(msg: "Sign out failed: $e");
+    }
   }
-  }
-  }
-
+}

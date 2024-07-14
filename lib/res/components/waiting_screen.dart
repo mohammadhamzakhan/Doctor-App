@@ -9,17 +9,15 @@ class WaitingScreen extends StatefulWidget {
 }
 
 class _WaitingScreenState extends State<WaitingScreen> {
-
   @override
   void initState() {
     AuthController().isUserAlreadyLogin();
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(),
     );
   }

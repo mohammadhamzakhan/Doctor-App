@@ -23,20 +23,20 @@ class AppointmentView extends StatelessWidget {
         ),
         actions: isDoctor
             ? [
-          IconButton(
-            onPressed: () {
-              AuthController().signout();
-            },
-            icon: Icon(Icons.power_settings_new_outlined),
-          ),
-        ]
+                IconButton(
+                  onPressed: () {
+                    AuthController().signout();
+                  },
+                  icon: const Icon(Icons.power_settings_new_outlined),
+                ),
+              ]
             : null, // Hides the button if isDoctor is false
       ),
       body: FutureBuilder<QuerySnapshot>(
         future: controller.getAppointments(isDoctor),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
@@ -60,11 +60,11 @@ class AppointmentView extends StatelessWidget {
                     trailing: isDoctor
                         ? null
                         : IconButton(
-                      icon: Icon(Icons.delete, color: Colors.black),
-                      onPressed: () {
-                        _showDeleteConfirmationDialog(context, doc.id);
-                      },
-                    ),
+                            icon: const Icon(Icons.delete, color: Colors.black),
+                            onPressed: () {
+                              _showDeleteConfirmationDialog(context, doc.id);
+                            },
+                          ),
                   );
                 },
               ),
@@ -80,17 +80,18 @@ class AppointmentView extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Delete Appointment"),
-          content: Text("Are you sure you want to delete this appointment?"),
+          title: const Text("Delete Appointment"),
+          content:
+              const Text("Are you sure you want to delete this appointment?"),
           actions: [
             TextButton(
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text("Delete"),
+              child: const Text("Delete"),
               onPressed: () {
                 _deleteAppointment(docId);
                 Navigator.of(context).pop();

@@ -20,7 +20,7 @@ class BookAppointmentView extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           docName,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -33,7 +33,7 @@ class BookAppointmentView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Select appointment day",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -49,7 +49,7 @@ class BookAppointmentView extends StatelessWidget {
                 },
               ),
               const Gap(20),
-              Text(
+              const Text(
                 "Select appointment time",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -65,7 +65,7 @@ class BookAppointmentView extends StatelessWidget {
                 },
               ),
               const Gap(20),
-              Text(
+              const Text(
                 "Mobile Number",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -82,7 +82,7 @@ class BookAppointmentView extends StatelessWidget {
                 },
               ),
               const Gap(20),
-              Text(
+              const Text(
                 "Full Name",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -98,7 +98,7 @@ class BookAppointmentView extends StatelessWidget {
                 },
               ),
               const Gap(20),
-              Text(
+              const Text(
                 "Message",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -115,20 +115,21 @@ class BookAppointmentView extends StatelessWidget {
               ),
               const Gap(20),
               Obx(
-                    () => controller.isLoading.value
-                    ? Center(
-                  child: CircularProgressIndicator(),
-                )
+                () => controller.isLoading.value
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
                     : Center(
-                      child: CustomElevatedButton(
-                                        buttonText: "Book an appointment",
-                                        onTap: () async {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        await controller.bookAppointment(docId, docName, context);
-                      }
-                                        },
-                                      ),
-                    ),
+                        child: CustomElevatedButton(
+                          buttonText: "Book an appointment",
+                          onTap: () async {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              await controller.bookAppointment(
+                                  docId, docName, context);
+                            }
+                          },
+                        ),
+                      ),
               ),
             ],
           ),

@@ -1,19 +1,17 @@
 import 'package:doctor_app/consts/lists.dart';
 import 'package:doctor_app/views/category_detail_view/category_details_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class Category extends StatelessWidget {
-  const Category({super.key});
+  Category({super.key});
 
+  final Color secondaryColor = Colors.grey.shade600; // Define secondary color
+  final Color textColor = Colors.black; // Define text color
+  final Color primaryColor = Colors.grey.shade200; // Define primary color
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = Colors.grey.shade200; // Define primary color
-    Color secondaryColor = Colors.grey.shade600; // Define secondary color
-    Color textColor = Colors.black; // Define text color
     return Scaffold(
       appBar: AppBar(
         //   backgroundColor: Colors.blue,
@@ -43,9 +41,10 @@ class Category extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    gradient:LinearGradient(
-                        begin: Alignment.topLeft,end: Alignment.topRight,
-                        colors: [Colors.grey.shade300,Colors.black12]),
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.topRight,
+                        colors: [Colors.grey.shade300, Colors.black12]),
                     borderRadius: BorderRadius.circular(19),
                   ),
                   child: Column(

@@ -22,14 +22,13 @@ class HomeView extends StatelessWidget {
     "Cold",
   ];
 
+  final Color primaryColor = Colors.grey.shade200; // Define primary color
+  final Color secondaryColor = Colors.grey.shade600; // Define secondary color
+  final Color textColor = Colors.black; // Define text color
   @override
   Widget build(BuildContext context) {
     var controller2 = Get.put(SettingController());
     var controller = Get.put(HomeController());
-
-    Color primaryColor = Colors.grey.shade200; // Define primary color
-    Color secondaryColor = Colors.grey.shade600; // Define secondary color
-    Color textColor = Colors.black; // Define text color
 
     return Scaffold(
       appBar: AppBar(
@@ -52,7 +51,8 @@ class HomeView extends StatelessWidget {
                       iconButton: IconButton(
                         onPressed: () {
                           Get.to(() => SearchView(
-                              searchQuery: controller.searchQueryController.text));
+                              searchQuery:
+                                  controller.searchQueryController.text));
                         },
                         icon: Icon(
                           Icons.search,
@@ -75,8 +75,8 @@ class HomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
+                  const Padding(
+                    padding: EdgeInsets.all(5.0),
                     child: Text(
                       "Categories",
                       style: TextStyle(
@@ -147,7 +147,8 @@ class HomeView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(() => SymptomsView(symptom: symptoms[index]));
+                            Get.to(
+                                () => SymptomsView(symptom: symptoms[index]));
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
@@ -156,7 +157,7 @@ class HomeView extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: const Color(0xFFF4F6FA),
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Colors.black12,
                                   blurRadius: 4,
@@ -167,7 +168,7 @@ class HomeView extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 symptoms[index],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black54,
@@ -202,7 +203,7 @@ class HomeView extends StatelessWidget {
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (!snapshot.hasData) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         } else {
@@ -212,7 +213,7 @@ class HomeView extends StatelessWidget {
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               crossAxisSpacing: 10.0,
                               mainAxisSpacing: 10.0,
@@ -221,7 +222,7 @@ class HomeView extends StatelessWidget {
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
                                 onTap: () {
-                                  Get.to((LoginViewDoctor(doc: data![index])));
+                                  Get.to((LoginViewDoctor(doc: data[index])));
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -240,7 +241,7 @@ class HomeView extends StatelessWidget {
                                           fit: BoxFit.fill,
                                         ),
                                       ),
-                                      Gap(10),
+                                      const Gap(10),
                                       Text(
                                         data![index]['docName'],
                                       ),

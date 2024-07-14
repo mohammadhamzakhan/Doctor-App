@@ -10,12 +10,11 @@ class AppointmentDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       // backgroundColor: Colors.blue,
+        // backgroundColor: Colors.blue,
         title: Text(
           doc['appWithName'],
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
-
           ),
         ),
       ),
@@ -24,7 +23,7 @@ class AppointmentDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Select appointment day",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -34,12 +33,12 @@ class AppointmentDetails extends StatelessWidget {
             const Gap(10),
             Text(
               doc['appDay'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
             const Gap(20),
-            Text(
+            const Text(
               "Select appointment time",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -49,12 +48,12 @@ class AppointmentDetails extends StatelessWidget {
             const Gap(10),
             Text(
               doc['appTime'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
             const Gap(20),
-            Text(
+            const Text(
               "Mobile Number",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -64,12 +63,12 @@ class AppointmentDetails extends StatelessWidget {
             const Gap(10),
             Text(
               doc['appPhone'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
             const Gap(20),
-            Text(
+            const Text(
               "Full Name",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -79,12 +78,12 @@ class AppointmentDetails extends StatelessWidget {
             const Gap(10),
             Text(
               doc['appName'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
             const Gap(20),
-            Text(
+            const Text(
               "Message",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -94,7 +93,7 @@ class AppointmentDetails extends StatelessWidget {
             const Gap(10),
             Text(
               doc['appMessage'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),

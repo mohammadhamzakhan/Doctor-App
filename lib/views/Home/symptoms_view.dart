@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SymptomsView extends StatelessWidget {
   final String symptom;
@@ -215,12 +214,13 @@ If your symptoms are severe or you have concerns about your health, it’s alway
             children: [
               Text(
                 symptom,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 symptomsDetails[symptom] ?? "No details available.",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ],
           ),

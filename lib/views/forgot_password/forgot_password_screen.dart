@@ -1,11 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import '../../controllers/auth_controller.dart';
-
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -47,7 +42,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 emailController.clear();
               },
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple, foregroundColor: Colors.white),
+                  backgroundColor: Colors.purple,
+                  foregroundColor: Colors.white),
               child: const Text("Forgot Password"),
             ),
           ),
